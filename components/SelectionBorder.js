@@ -2,9 +2,9 @@ app.component('selection-border', {
     template:
     /*html*/
         `<div id="borderForToolbar" class="toolbar-div" v-if="showTools">
-            <toolbar-menu>  </toolbar-menu>
+            <toolbar-menu :anchor="anchor" :focus="focus">  </toolbar-menu>
         </div>`,
-    props: ['showTools', 'top', 'left'],
+    props: ['showTools', 'top', 'left', 'anchor', 'focus'],
     mounted() {
         this.start();
     },
