@@ -2,16 +2,15 @@ app.component('toolbar-menu', {
     template:
     /*html*/
         `<div>
-                <ul>
-                 <li v-show="show" v-for="tool in tools" class="toolbar-item">
-                     <a href="#" class="button" @click='setOption(tool.option)'> 
-                        <i :class="tool.icon"></i>
-                     </a>
-                 </li>
-                 <li v-show="!show" class="tool-link"><input  name="tool-link" v-model="rawLink" @keyup.enter="applyLink"></li>
-                </ul>
-            </div>`,
-    // props: ["anchor", "focus"],
+            <ul>
+             <li v-show="show" v-for="tool in tools" class="toolbar-item">
+                 <a href="#" class="button" @click='setOption(tool.option)'> 
+                    <i :class="tool.icon"></i>
+                 </a>
+             </li>
+             <li v-show="!show" class="tool-link"><input  name="tool-link" v-model="link" placeholder="https://www.typeform.com" @keyup.enter="applyLink"></li>
+            </ul>
+        </div>`,
     data() {
         return {
             tools: [
@@ -19,7 +18,7 @@ app.component('toolbar-menu', {
                 {icon: 'icon-italic', option: 'italic'},
                 {icon: 'icon-link', option: 'createLink'}
             ],
-            rawLink: 'www.pl',
+            link: '',
             show: true,
             start: null,
             end: null,
@@ -57,14 +56,19 @@ app.component('toolbar-menu', {
             sel.removeAllRanges();
             sel.addRange(range);
         },
-        checkLink(){
-            if((this.rawLink.substring(0,7)==='http://') || (this.rawLink.substring(0,8)==='https://')) {
-                this.apply('createLink', this.rawLink)
+        checkLink() {
+            if ((this.link.substring(0, 7) === 'http://') || (this.link.substring(0, 8) === 'https://')) {
+                this.apply('createLink', this.link)
+            } else {
+                this.link = 'http://' + this.link;
+                this.apply('createLink', this.link);
             }
-            else {
-                this.rawLink = 'http://' + this.rawLink;
-                this.apply('createLink', this.rawLink)
-            }
+
+            div = document.getElementById('editor')
+            allA = div.querySelectorAll('a');
+            allA.forEach(a => {
+                if (a.title === '') a.setAttribute('title', this.link)
+            });
         }
     }
 })

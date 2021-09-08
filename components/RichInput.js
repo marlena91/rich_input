@@ -11,8 +11,6 @@ app.component('rich-input', {
         >
         </selection-border>
         
-<!--        :anchor="anchor" :focus="focus"-->
-        
         <div contenteditable="true" 
              id="editor" 
              class='editor-field' 
@@ -20,8 +18,6 @@ app.component('rich-input', {
              @mousedown="showTools=false"
              @mouseup="checkSelection()">
         </div>
-        
-
     </div>
     `,
     data() {
@@ -60,6 +56,5 @@ app.component('rich-input', {
             text = text.replaceAll('</a>', ']')
             this.value = text
         },
-
     }
 })

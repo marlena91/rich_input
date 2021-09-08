@@ -18,6 +18,10 @@ body {
     text-align: center;
 }
 
+.editor-field a:hover {
+    cursor: pointer;
+}
+
 [contenteditable] {
     outline: 0px solid transparent;
 }
@@ -59,6 +63,4 @@ li {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: larger;
-
 }

@@ -14,7 +14,7 @@ app.component('selection-border', {
     methods: {
         start() {
             document.getElementById("borderForToolbar").style.top = this.top - 40 + 'px';
-            document.getElementById("borderForToolbar").style.left = this.left - 20 + 'px';
+            document.getElementById("borderForToolbar").style.left = this.left - 40 + 'px';
         }
 
     }
