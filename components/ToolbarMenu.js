@@ -33,25 +33,38 @@ app.component('toolbar-menu', {
         },
         setOption(option) {
             if (option === 'createLink') {
-                selection = document.getSelection();
-                range = selection.getRangeAt(0);
-                this.start = range.startContainer;
-                this.end = range.endContainer;
-                this.startOffset = range.startOffset;
-                this.endOffset = range.endOffset;
+                this.getSelection();
                 this.show = false;
             } else this.apply(option)
         },
+        getSelection() {
+            selection = document.getSelection();
+            range = selection.getRangeAt(0);
+            this.start = range.startContainer;
+            this.end = range.endContainer;
+            this.startOffset = range.startOffset;
+            this.endOffset = range.endOffset;
+        },
         applyLink() {
-
+            this.doSelection();
+            this.checkLink();
+        },
+        doSelection() {
             range = document.createRange();
             range.setStart(this.start, this.startOffset);
             range.setEnd(this.end, this.endOffset);
             sel = window.getSelection();
             sel.removeAllRanges();
             sel.addRange(range);
-
-            this.apply('createLink', this.rawLink)
         },
+        checkLink(){
+            if((this.rawLink.substring(0,7)==='http://') || (this.rawLink.substring(0,8)==='https://')) {
+                this.apply('createLink', this.rawLink)
+            }
+            else {
+                this.rawLink = 'http://' + this.rawLink;
+                this.apply('createLink', this.rawLink)
+            }
+        }
     }
 })

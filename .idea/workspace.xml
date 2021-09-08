@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5190e3ea-dcb7-467c-9c72-bf2181375b12" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RichInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/RichInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/SelectionBorder.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/SelectionBorder.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/ToolbarMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ToolbarMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,7 @@
       <workItem from="1630664234513" duration="12383000" />
       <workItem from="1630909620531" duration="840000" />
       <workItem from="1630910822753" duration="40611000" />
-      <workItem from="1631000780790" duration="18238000" />
+      <workItem from="1631000780790" duration="19815000" />
     </task>
     <servers />
   </component>
