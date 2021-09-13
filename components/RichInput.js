@@ -5,13 +5,13 @@ app.component('rich-input', {
     <pre>{{$data}}</pre>    
     <div id="editorContainer" class='text-editor'>
                
-        <selection-border v-if="showTools" 
+        <tool-tip v-if="showTools" 
         :show-tools="showTools" 
         :top="top" :left="left"
         >
-        </selection-border>
+        </tool-tip>
         
-        
+       
         
         <div contenteditable="true" 
              id="editor" 
