@@ -4,12 +4,14 @@ app.component('rich-input', {
         `
     <pre>{{$data}}</pre>    
     <div id="editorContainer" class='text-editor'>
-    
+               
         <selection-border v-if="showTools" 
         :show-tools="showTools" 
         :top="top" :left="left"
         >
         </selection-border>
+        
+        
         
         <div contenteditable="true" 
              id="editor" 
@@ -32,8 +34,8 @@ app.component('rich-input', {
         checkSelection() {
             selection = document.getSelection();
             if (selection.toString() !== '') {
-                this.showTools = true;
                 range = selection.getRangeAt(0);
+                this.showTools = true;
                 rect = range.getBoundingClientRect();
                 this.top = rect.top;
                 this.left = rect.left;

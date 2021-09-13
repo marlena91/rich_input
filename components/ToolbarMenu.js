@@ -3,7 +3,7 @@ app.component('toolbar-menu', {
     /*html*/
         `<div>
             <ul>
-             <li v-show="show" v-for="tool in tools" class="toolbar-item">
+             <li v-show="show" v-for="tool in tools" class="toolbar-item" >
                  <a href="#" class="button" @click='setOption(tool.option)'> 
                     <i :class="tool.icon"></i>
                  </a>
@@ -26,14 +26,26 @@ app.component('toolbar-menu', {
             endOffset: 0,
         }
     },
+    mounted() {
+        if((range.startContainer.parentNode.tagName === 'A') || (range.endContainer.parentNode.tagName === 'A')) {
+            link = document.getElementsByClassName("button")[2];
+            link.classList.add("sel-btn");
+        }
+    },
     methods: {
         apply(command, value) {
             document.execCommand(command, false, value)
         },
         setOption(option) {
+
             if (option === 'createLink') {
-                this.getSelection();
-                this.show = false;
+                if((range.startContainer.parentNode.tagName === 'A') || (range.endContainer.parentNode.tagName === 'A')) {
+                    document.getElementsByClassName("button")[2].classList.remove("sel-btn");
+                    this.apply('unlink');
+                } else {
+                    this.getSelection();
+                    this.show = false;
+                }
             } else this.apply(option)
         },
         getSelection() {

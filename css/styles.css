@@ -54,6 +54,13 @@ li {
     text-decoration: none;
     display: inline-block;
     font-size: larger;
+    height: 100%;
+}
+
+.sel-btn {
+    color: whitesmoke;
+    background-color: #8793a4;
+    border-radius: 4px;
 }
 
 .tool-link input {
@@ -64,3 +71,5 @@ li {
     text-decoration: none;
     display: inline-block;
 }
+
+
