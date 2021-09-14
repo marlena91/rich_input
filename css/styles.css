@@ -44,6 +44,7 @@ li {
     background-color: #fff;
     display: flex;
     justify-content: space-around;
+    z-index: 1;
 }
 
 .button {
@@ -72,4 +73,29 @@ li {
     display: inline-block;
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
 
+.tooltip .tooltiptext {
+    width: 120px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    visibility: hidden;
+    background-color: whitesmoke;
+    border: 1px solid #ddd;
+    color: #8793a4;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px 0;
+    font-size: 12px;
+    position: absolute;
+
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}S

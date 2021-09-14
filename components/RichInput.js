@@ -1,8 +1,7 @@
 app.component('rich-input', {
     template:
     /*html*/
-        `
-    <pre>{{$data}}</pre>    
+        ` 
     <div id="editorContainer" class='text-editor'>
                
         <tool-tip v-if="showTools" 
@@ -10,8 +9,6 @@ app.component('rich-input', {
         :top="top" :left="left"
         >
         </tool-tip>
-        
-       
         
         <div contenteditable="true" 
              id="editor" 

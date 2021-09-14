@@ -9,7 +9,9 @@ app.component('tool-tip', {
         this.start();
     },
     data() {
-        return {}
+        return {
+            
+        }
 
     },
     methods: {

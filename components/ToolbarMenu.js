@@ -79,7 +79,11 @@ app.component('toolbar-menu', {
             div = document.getElementById('editor')
             allA = div.querySelectorAll('a');
             allA.forEach(a => {
-                if (a.title === '') a.setAttribute('title', this.link)
+                if (a.title === '') {
+                    a.setAttribute('title', this.link);
+                    a.classList.add('tooltip');
+                    a.innerHTML = a.text + "<span class='tooltiptext'>"+a.title+"</span>"
+                }
             });
         }
     }
