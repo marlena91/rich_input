@@ -3,12 +3,14 @@ app.component('toolbar-menu', {
     /*html*/
         `<div>
             <ul>
-             <li v-show="show" v-for="tool in tools" class="toolbar-item" >
+             <li v-if="show" v-for="tool in tools" class="toolbar-item" >
                  <a href="#" class="button" @click='setOption(tool.option)'> 
                     <i :class="tool.icon"></i>
                  </a>
              </li>
-             <li v-show="!show" class="tool-link"><input  name="tool-link" v-model="link" placeholder="https://www.typeform.com" @keyup.enter="applyLink"></li>
+             <li   v-if="!show" class="tool-link">
+                <input id="test" name="tool-link" v-model="link" placeholder="https://www.typeform.com" @keyup.enter="applyLink">
+             </li>
             </ul>
         </div>`,
     data() {
@@ -27,26 +29,62 @@ app.component('toolbar-menu', {
         }
     },
     mounted() {
-        if((range.startContainer.parentNode.tagName === 'A') || (range.endContainer.parentNode.tagName === 'A')) {
-            link = document.getElementsByClassName("button")[2];
-            link.classList.add("sel-btn");
+        start = range.startContainer.parentNode;
+        end = range.endContainer.parentNode;
+
+        do {
+            if ((start.tagName === 'B') && (end.tagName === 'B')) {
+                document.getElementsByClassName("button")[0].classList.add("sel-btn");
+            }
+            if ((start.tagName === 'I') && (end.tagName === 'I')) {
+                document.getElementsByClassName("button")[1].classList.add("sel-btn");
+            }
+            if ((start.tagName === 'A') || (end.tagName === 'A')) {
+                document.getElementsByClassName("button")[2].classList.add("sel-btn");
+            }
+
+            start = start.parentNode;
+            end = end.parentNode;
         }
+        while (start.tagName !== 'DIV' || end.tagName !== 'DIV')
     },
     methods: {
         apply(command, value) {
             document.execCommand(command, false, value)
         },
         setOption(option) {
-
             if (option === 'createLink') {
-                if((range.startContainer.parentNode.tagName === 'A') || (range.endContainer.parentNode.tagName === 'A')) {
+                if(document.getElementsByClassName("button")[2].className === "button sel-btn") {
                     document.getElementsByClassName("button")[2].classList.remove("sel-btn");
+
+                    spanForTooltip = document.getElementById('editor').querySelectorAll('a');
+                    spanForTooltip.forEach(a => {
+                        if(a.children[0].innerHTML === getSelection().focusNode.nextElementSibling.innerHTML)
+                            a.removeChild(a.lastChild)
+                    })
+
                     this.apply('unlink');
-                } else {
+                }
+
+                else {
+                    document.getElementsByClassName("button")[2].classList.add("sel-btn");
                     this.getSelection();
                     this.show = false;
+
                 }
-            } else this.apply(option)
+            } else if (option === 'bold') {
+                if(document.getElementsByClassName("button")[0].className === "button sel-btn")
+                    document.getElementsByClassName("button")[0].classList.remove("sel-btn");
+                else document.getElementsByClassName("button")[0].classList.add("sel-btn");
+
+                this.apply(option)
+            } else if (option === 'italic') {
+                if(document.getElementsByClassName("button")[1].className === "button sel-btn")
+                    document.getElementsByClassName("button")[1].classList.remove("sel-btn");
+                else document.getElementsByClassName("button")[1].classList.add("sel-btn");
+
+                this.apply(option)
+            }
         },
         getSelection() {
             selection = document.getSelection();
@@ -55,6 +93,9 @@ app.component('toolbar-menu', {
             this.end = range.endContainer;
             this.startOffset = range.startOffset;
             this.endOffset = range.endOffset;
+            window.setTimeout(function ()  {
+                document.getElementById('test').focus();
+            }, 100);
         },
         applyLink() {
             this.doSelection();
@@ -82,7 +123,7 @@ app.component('toolbar-menu', {
                 if (a.title === '') {
                     a.setAttribute('title', this.link);
                     a.classList.add('tooltip');
-                    a.innerHTML = a.text + "<span class='tooltiptext'>"+a.title+"</span>"
+                    a.innerHTML = a.text + "<span class='tooltiptext'>" + a.title + "</span>"
                 }
             });
         }
