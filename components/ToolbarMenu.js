@@ -100,6 +100,8 @@ app.component('toolbar-menu', {
         applyLink() {
             this.doSelection();
             this.checkLink();
+            this.show = true;
+
         },
         doSelection() {
             range = document.createRange();
