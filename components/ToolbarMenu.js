@@ -9,7 +9,7 @@ app.component('toolbar-menu', {
                  </a>
              </li>
              <li   v-if="!show" class="tool-link">
-                <input id="test" name="tool-link" v-model="link" placeholder="https://www.typeform.com" @keyup.enter="applyLink">
+                <input id="focus" name="tool-link" v-model="link" placeholder="https://www.typeform.com" @keyup.enter="applyLink">
              </li>
             </ul>
         </div>`,
@@ -31,7 +31,11 @@ app.component('toolbar-menu', {
     mounted() {
         start = range.startContainer.parentNode;
         end = range.endContainer.parentNode;
-
+        children = range.commonAncestorContainer.childNodes;
+        if(children.length >0) {
+            for (let i = 0; i<= children.length-1; i++)
+            console.log(range.commonAncestorContainer.childNodes[i].nodeName);
+        }
         do {
             if ((start.tagName === 'B') && (end.tagName === 'B')) {
                 document.getElementsByClassName("button")[0].classList.add("sel-btn");
@@ -94,7 +98,7 @@ app.component('toolbar-menu', {
             this.startOffset = range.startOffset;
             this.endOffset = range.endOffset;
             window.setTimeout(function ()  {
-                document.getElementById('test').focus();
+                document.getElementById('focus').focus();
             }, 100);
         },
         applyLink() {

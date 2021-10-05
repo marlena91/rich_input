@@ -2,13 +2,11 @@ app.component('rich-input', {
     template:
     /*html*/
         ` 
-    <div id="editorContainer" class='text-editor'>
+    <div class="container" >
                
-        <tool-tip v-if="showTools" 
-        :show-tools="showTools" 
-        :top="top" :left="left"
-        >
-        </tool-tip>
+         <div id="borderForTooltip" class="toolbar-div" v-show="showTools">
+            <toolbar-menu v-if="toolbar"></toolbar-menu>
+        </div>
         
         <div contenteditable="true" 
              id="editor" 
@@ -21,24 +19,28 @@ app.component('rich-input', {
     `,
     data() {
         return {
+            toolbar: false,
             showTools: false,
-            top: 0,
-            left: 0,
             value: '',
         }
     },
     methods: {
         checkSelection() {
             selection = document.getSelection();
-            if (selection.toString() !== '') {
+            if(selection.toString() !== '') {
                 range = selection.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
                 this.showTools = true;
-                rect = range.getBoundingClientRect();
-                this.top = rect.top;
-                this.left = rect.left;
+                this.toolbar = true;
+                this.drawToolTip(rect.top,rect.left, rect.right);
             } else {
+                this.toolbar = false;
                 this.showTools = false;
             }
+        },
+        drawToolTip(top,left,right){
+            document.getElementById("borderForTooltip").style.top = top - 40 + 'px';
+            document.getElementById("borderForTooltip").style.left = left + (right-left)/2 - 80 + 'px';
         },
         onInput(e) {
             let text = e.target.innerHTML
