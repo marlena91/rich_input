@@ -31,11 +31,6 @@ app.component('toolbar-menu', {
     mounted() {
         start = range.startContainer.parentNode;
         end = range.endContainer.parentNode;
-        children = range.commonAncestorContainer.childNodes;
-        if(children.length >0) {
-            for (let i = 0; i<= children.length-1; i++)
-            console.log(range.commonAncestorContainer.childNodes[i].nodeName);
-        }
         do {
             if ((start.tagName === 'B') && (end.tagName === 'B')) {
                 document.getElementsByClassName("button")[0].classList.add("sel-btn");
@@ -43,7 +38,7 @@ app.component('toolbar-menu', {
             if ((start.tagName === 'I') && (end.tagName === 'I')) {
                 document.getElementsByClassName("button")[1].classList.add("sel-btn");
             }
-            if ((start.tagName === 'A') || (end.tagName === 'A')) {
+            if ((start.tagName === 'A') && (end.tagName === 'A')) {
                 document.getElementsByClassName("button")[2].classList.add("sel-btn");
             }
 

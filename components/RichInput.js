@@ -12,7 +12,7 @@ app.component('rich-input', {
              id="editor" 
              class='editor-field' 
              @input="onInput" 
-             @mousedown="showTools=false"
+             @mousedown="showTools=false, toolbar=false"
              @mouseup="checkSelection()">
         </div>
     </div>
